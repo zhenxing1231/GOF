@@ -9,16 +9,31 @@ namespace GOF._22_Flyweight
     {
         private Hashtable _flyweights = new Hashtable();
 
-        public FlyweightFactory()
-        {
-            _flyweights.Add("1",new ConcreteFlyweight());
-            _flyweights.Add("2",new ConcreteFlyweight());
-            _flyweights.Add("3",new ConcreteFlyweight());
-        }
+        // public FlyweightFactory()
+        // {
+        //     _flyweights.Add("1",new ConcreteFlyweight());
+        //     _flyweights.Add("2",new ConcreteFlyweight());
+        //     _flyweights.Add("3",new ConcreteFlyweight());
+        // }
+        
         
         public Flyweight GetFlyweight(string key)
         {
-            return (Flyweight)_flyweights[key];
+            if (_flyweights.ContainsKey(key))
+            {
+                return (Flyweight)_flyweights[key];
+            }
+            else
+            {
+                ConcreteFlyweight newFlyweight = new ConcreteFlyweight();
+                _flyweights.Add(key,newFlyweight);
+                return newFlyweight;
+            }
+        }
+
+        public int GetInstanceCount()
+        {
+            return _flyweights.Count;
         }
     }
 }
