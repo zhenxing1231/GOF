@@ -448,35 +448,94 @@
 
 #endregion
 
-#region 享元模式 （重点）
+#region 享元模式 （常用）
 
-using GOF._22_Flyweight;
+// using GOF._22_Flyweight;
+//
+// //享元模式是运用共享技术有效地支持大量细粒度的对象，可以避免大量非常相似类的开销
+// //个人理解这种模式类似于对象池技术。
+//
+// static void Main()
+// {
+//     int extrinsicstate = 30;
+//
+//     FlyweightFactory factory = new FlyweightFactory();
+//
+//     Flyweight f1 = factory.GetFlyweight("1");
+//     f1.Operation(--extrinsicstate);
+//     
+//     Flyweight f2 = factory.GetFlyweight("2");
+//     f2.Operation(--extrinsicstate);
+//     
+//     Flyweight f3 = factory.GetFlyweight("3");
+//     f3.Operation(--extrinsicstate);
+//     
+//     Flyweight f4 = factory.GetFlyweight("3");
+//     f4.Operation(--extrinsicstate);
+//
+//     Flyweight flyweight = new UnsharedConcreteFlyweight();
+//     flyweight.Operation(--extrinsicstate);
+//
+//     Console.WriteLine($"工厂示例总数：{factory.GetInstanceCount()}");
+//     
+//     Console.Read();
+// }
 
+#endregion
+
+#region 解释器模式 （轻知识）
+
+// using GOF._23_Interpreter;
+//
+// //解释器模式 给定一个语言，定义它的文法的一种表示，并定义一个解释器用来解释语言中的句子。
+// //个人感觉需要自己实现并使用的地方较少，本质上类似于构造一套的正则表达式一样的东西
+//
+// static void Main()
+// {
+//     List<int> temp = new List<int>() {1, 3, 2, 4, 2, 2, 3, 4, 1, 2, 1};
+//     
+//     AbstractExpression expression = new NonterminalExpression();
+//     for (int i = 0; i < temp.Count; i++)
+//     {
+//         Context context = new Context(temp[i]);
+//         expression.Interpret(context);
+//         if (i == temp.Count - 1)
+//         {
+//             expression = new TerminalExpression();
+//             expression.Interpret(context);
+//         }
+//     }
+//     
+//     Console.Read();
+// }
+
+
+#endregion
+
+#region 访问者模式 （重点）
+
+using GOF._24_Visitor;
+
+//访问者模式 表示一个作用于某对象结构中的各元素的操作，可以在不改变元素类的前提下定义作用于这些元素的新操作
+//访问者模式适用于数据结构相对稳定的系统，即在Visitor类中虚方法是比较固定的，比如这里就只有A、B两个类别，如果这个类别不固定，那么就比较麻烦。
 
 static void Main()
 {
-    int extrinsicstate = 30;
-
-    FlyweightFactory factory = new FlyweightFactory();
-
-    Flyweight f1 = factory.GetFlyweight("1");
-    f1.Operation(--extrinsicstate);
+    ObjectStructure objectStructure = new ObjectStructure();
     
-    Flyweight f2 = factory.GetFlyweight("2");
-    f2.Operation(--extrinsicstate);
-    
-    Flyweight f3 = factory.GetFlyweight("3");
-    f3.Operation(--extrinsicstate);
+    objectStructure.Attach(new ConcreteElementA(),new ConcreteElementB());
 
-    Flyweight flyweight = new UnsharedConcreteFlyweight();
-    flyweight.Operation(--extrinsicstate);
+    ConcreteVisitor1 visitor1 = new ConcreteVisitor1();
+    ConcreteVisitor2 visitor2 = new ConcreteVisitor2();
+    
+    objectStructure.Accept(visitor1);
+    objectStructure.Accept(visitor2);
     
     Console.Read();
 }
 
+
 #endregion
-
-
 
 
 
