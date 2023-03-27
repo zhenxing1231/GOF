@@ -235,16 +235,272 @@
 
 #endregion
 
-#region 适配器模式 
+#region 适配器模式 (常用)
 
-using GOF._13_Adapter;
+// using GOF._13_Adapter;
+//
+// //适配器模式主要是用于对于已经存在的类，它的接口相似但是不完全相同，并且不太容易修改的时候使用，更像是一种补救措施
+//
+// static void Main()
+// {
+//     Target target = new Adapter();
+//     target.Request();
+//     Console.Read();
+// }
+
+#endregion
+
+#region 备忘录模式 （重点）
+
+// using GOF._14_Memento;
+//
+// //备忘录模式，用来存储细节，以备某个时刻用于恢复存储当时的状态 
+//
+// static void Main()
+// {
+//     //初始化状态
+//     Originator originator = new Originator();
+//     originator.State = "开启";
+//     originator.Show();
+//     //管理者记录当前的状态
+//     Caretaker caretaker = new Caretaker();
+//     caretaker.Memento = originator.CreateMemento();
+//     //状态改变
+//     originator.State = "关闭";
+//     originator.Show();
+//     
+//     //还原状态
+//     originator.SetMemento(caretaker.Memento);
+//     originator.Show();
+//     
+//     Console.Read();
+// }
+
+#endregion
+
+#region 组合模式 （轻知识）
+
+// using GOF._15_Composite;
+//
+// //组合模式 个人感觉就是在构建一颗树， 用来表示整体的结构，同时每一个节点都能共有同一个相似的操作。感觉是一个比较少用的模式
+//
+// static void Main()
+// {
+//     Composite root = new Composite("Root");
+//     root.Add(new Leaf("Leaf A"));
+//     root.Add(new Leaf("Leaf B"));
+//
+//     Composite composite1 = new Composite("composite1");
+//     composite1.Add(new Leaf("Leaf C"));
+//     composite1.Add(new Leaf("Leaf D"));
+//     
+//     root.Add(composite1);
+//     
+//     root.Display(1);
+//     
+//     Console.Read();
+// }
+
+
+#endregion
+
+#region 迭代器模式 （轻知识）
+
+// using GOF._16_Iterator;
+//
+// //迭代器模式 C#官方的foreach就是迭代器模式的一个实现案例
+//
+// static void Main()
+// {
+//     ConcreteAggregate aggregate = new ConcreteAggregate();
+//
+//     for (int i = 0; i < 9; i++)
+//     {
+//         aggregate[i] = (i+1).ToString();
+//     }
+//
+//     Iterator iterator = new ConcreteIterator(aggregate);
+//
+//     object item = iterator.First();
+//     while (!iterator.IsDone())
+//     {
+//         Console.WriteLine($"{iterator.CurrentItem()}");
+//         iterator.Next();
+//     }
+//     
+//     Console.Read();
+// }
+
+#endregion
+
+#region 单例模式 （重点）
+
+// using GOF._17_Singleton;
+//
+// //单例模式是一个非常常用的模式，作用是保持唯一的实例，并提供一个全局访问的入口
+//
+// static void Main()
+// {
+//     ConcreteSingleton c1 = ConcreteSingleton.Instance;
+//     c1.Data = "C1";
+//
+//     ConcreteSingleton c2 = ConcreteSingleton.Instance;
+//     c2.Data = "C2";
+//     
+//     Console.WriteLine($"{c1.Data} || {c2.Data}");
+//     
+//     Console.Read();
+// }
+
+#endregion
+
+#region 桥接模式 （重点）
+
+// using GOF._18_Bridge;
+//
+// //桥接模式可以将抽象部分和实现部分分离，这个实现是指抽象类和它的派生类用来实现自己的对象
+// //个人理解为，分离从原始抽象类抽象出来的对象和从原始抽象类精炼出一个抽象类中抽象出来的对象。
+//
+// static void Main()
+// {
+//     Abstraction abstraction = new RefinedAbstraction();
+//     abstraction.SetImplementor(new ConcreteImplementorA());
+//     abstraction.Operation();
+//     
+//     abstraction.SetImplementor(new ConcreteImplementorB());
+//     abstraction.Operation();
+//     
+//     Console.Read();
+// }
+
+
+#endregion
+
+#region 命令模式 (重点)
+
+// using GOF._19_Command;
+//
+// //命令模式用于将一个请求封装为一个对象，从而实现对不同请求进行参数化，还能进行排队或记录请求日志，以及未调用前支持撤销操作。
+// //该模式可以轻松实现一个命令队列，并且进行日志记录
+//
+// static void Main()
+// {
+//     //创建接收者
+//     Receiver receiver = new Receiver();
+//     //创建命令并指定接收者
+//     Command command1 = new ConcreteCommand(receiver);
+//     Command command2 = new ConcreteCommand(receiver);
+//     //创建调用者
+//     Invoker invoker = new Invoker();
+//     invoker.SetCommand(command1,command2);
+//     invoker.ExecuteCommand();
+//     
+//     Console.Read();
+// }
+
+#endregion
+
+#region 职责链模式 （重点）
+
+// using GOF._20_ChainOfResponsibility;
+//
+// //职责链模式可以按照一条链去传递处理一个请求，直到该请求被处理
+// //个人理解，该模式非常适合用于if-else的结构的解耦合，但是需要注意构建一条合理且完备的链，否则将会出现逻辑问题
+//
+// static void Main()
+// {
+//     Handler h1 = new ConcreteHandler1();
+//     Handler h2 = new ConcreteHandler2();
+//     
+//     h1.SetSuccessor(h2);
+//     
+//     h1.HandleRequest(4);
+//     h1.HandleRequest(18);
+//     
+//     Console.Read();
+// }
+
+#endregion
+
+#region 中介者模式 （重点）
+
+
+// using GOF._21_Mediator;
+//
+// //中介者模式用一个中介对象来封装不同的对象交互，使交互的双方不需要相互引用，从而实现解耦。一般运用于一组对象以定义良好但复杂的方式进行通信的场合。
+// //个人理解为像是为一个功能做的一个管理类，虽然对象之间解耦合了，但是该管理类的复杂程度会上升很多。
+//
+// static void Main()
+// {
+//     ConcreteMediator mediator = new ConcreteMediator();
+//
+//     ConcreteColleague1 c1 = new ConcreteColleague1(mediator);
+//     ConcreteColleague2 c2 = new ConcreteColleague2(mediator);
+//
+//     mediator.Colleague1 = c1;
+//     mediator.Colleague2 = c2;
+//     
+//     c1.Send("lalalalalalala");
+//     c2.Send("hahahahahahaha");
+//     Console.Read();
+// }
+
+
+#endregion
+
+#region 享元模式 （重点）
+
+using GOF._22_Flyweight;
+
 
 static void Main()
 {
+    int extrinsicstate = 30;
+
+    FlyweightFactory factory = new FlyweightFactory();
+
+    Flyweight f1 = factory.GetFlyweight("1");
+    f1.Operation(--extrinsicstate);
     
+    Flyweight f2 = factory.GetFlyweight("2");
+    f2.Operation(--extrinsicstate);
+    
+    Flyweight f3 = factory.GetFlyweight("3");
+    f3.Operation(--extrinsicstate);
+
+    Flyweight flyweight = new UnsharedConcreteFlyweight();
+    flyweight.Operation(--extrinsicstate);
+    
+    Console.Read();
 }
 
 #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 Main();

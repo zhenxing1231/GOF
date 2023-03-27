@@ -5,6 +5,9 @@
     /// </summary>
     public class Target
     {
-        
+        public virtual void Request()
+        {
+            Console.WriteLine("普通请求！");
+        }
     }
 }
