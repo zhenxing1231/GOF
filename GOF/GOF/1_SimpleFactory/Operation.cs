@@ -1,4 +1,4 @@
-﻿namespace _1_SimpleFactory
+﻿namespace GOF._1_SimpleFactory
 {
     public class Operation
     {
